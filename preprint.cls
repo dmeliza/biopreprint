@@ -1,0 +1,151 @@
+%% Class preprint
+%% Adapted from nature.cls, by Peter Czoschke, czoschke@mrl.uiuc.edu
+%% v1.0 21 Apr 2008
+%% Major revision by C Daniel Meliza, dmeliza@uchicago.edu
+%%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{preprint}[06/1/2011 v1.1]
+\typeout{A class for writing preprints}
+\typeout{Original by Peter Czoschke, adapted by Dan Meliza}
+\typeout{ }
+
+\LoadClassWithOptions{article}
+\RequirePackage{times}
+\RequirePackage{mathptmx}
+\RequirePackage{fullpage}
+\RequirePackage{ifthen}
+\RequirePackage{fancyhdr}
+\RequirePackage[none]{hyphenat}
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}
+\RequirePackage{graphicx}
+\RequirePackage{latexsym}
+\RequirePackage{amsfonts}
+\RequirePackage{url}
+\RequirePackage{booktabs}
+\RequirePackage{rotating}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+%% Some style parameters
+\setlength\parindent{0in}
+\setlength\parskip{12pt}
+\newcommand{\spacing}[1]{\renewcommand{\baselinestretch}{#1}\large\normalsize}
+\spacing{2}
+
+%% Reduce the amount of skip around equations
+\setlength{\abovedisplayskip}{0ex}
+\g@addto@macro\normalsize{\setlength{\abovedisplayskip}{0ex}}
+
+%% Redefine title
+\def\@maketitle{%
+  \newpage\spacing{1}\setlength{\parskip}{12pt}%
+    {\Large\bfseries\noindent\raggedright \textsf{\@title} \par}%
+    {\noindent\sloppy \@author}%
+}
+
+%% Define the affiliations environment, list each institution as an \item
+%% Put after \maketitle
+\newenvironment{affiliations}{%
+    \setcounter{enumi}{1}%
+    \setlength{\parindent}{0in}%
+    \spacing{1}%
+    \slshape\sloppy%
+    \begin{list}{\upshape$^{\arabic{enumi}}$}{%
+        \usecounter{enumi}%
+        \setlength{\leftmargin}{0in}%
+        \setlength{\topsep}{0in}%
+        \setlength{\labelsep}{0in}%
+        \setlength{\labelwidth}{0in}%
+        \setlength{\listparindent}{0in}%
+        \setlength{\itemsep}{0ex}%
+        \setlength{\parsep}{0in}%
+        }
+    }{\end{list}}
+
+
+%% Define the frontpage environment for running title, corresponding
+%% author, etc.
+\newenvironment{frontpage}{%
+    \setlength{\parindent}{0in}%
+    \spacing{1}%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{0in}%
+        \setlength{\listparindent}{0in}%
+        \setlength{\labelsep}{0em}%
+        \setlength{\labelwidth}{0in}%
+        \setlength{\itemsep}{12pt}%
+        \let\makelabel\frontpagelabel}
+    }
+    {\end{list}}
+\newcommand*{\frontpagelabel}[1]{\textbf{#1}\hspace{1em}}
+
+%% Redefine the \section formats.
+\renewcommand{\section}{\@startsection {section}{1}{0pt}%
+  {-1ex}{0.01ex minus 1ex}%
+  {\bfseries\large}%
+}
+\renewcommand{\subsection}{\@startsection {subsection}{2}{0pt}%
+  {-1ex}{0.01ex minus 1ex}%
+  {\itshape}%
+}
+
+
+% define some text
+\newcommand\abstracttitle{Abstract}
+\newcommand\methodstitle{Methods}
+\newcommand\introtitle{Introduction}
+\newcommand\resultstitle{Results}
+\newcommand\discussiontitle{Discussion}
+\newcommand\referencestitle{References}
+
+%% Redefine the abstract environment to look like a normal section
+\renewenvironment{abstract}{%
+  \clearpage%
+  \section*{\abstracttitle}
+}{}
+
+%% Define the methods environment.  Use \subsection to separate.
+\newenvironment{methods}{%
+  \section*{\methodstitle}%
+}{}
+
+%% Define the introduction environment; default is to suppress subsections
+\newenvironment{introduction}{%
+  \clearpage%
+  \section*{\introtitle}%
+}{}
+
+\newenvironment{results}{%
+  \section*{\resultstitle}%
+}{}
+
+\newenvironment{discussion}{%
+  \section*{\discussiontitle}%
+}{}
+
+\newcommand{\references}[1]{%
+  \clearpage%
+  \section*{\referencestitle}%
+  \bibliography{#1}%
+}
+
+%% No heading for References section, but eat up the extra space from \section command
+\renewcommand\refname{\vspace{-48pt}\setlength{\parskip}{12pt}}
+
+%% Figures are generally not embedded in the file; to print the
+%% legends use \includegraphics and \captionof; the graphics
+%% themselves will be ignored
+\AtBeginDocument{\let\includegraphics\NAT@ignore}
+\newcommand{\NAT@ignore}[2][]{}
+
+%redefine caption to captionlistentry to suppress figure floats
+\renewenvironment{figure}{%
+  \let\caption\captionlistentry%
+  \@float{figure}
+ }{\end@float}
+
+% format list of figures
+\renewcommand\listfigurename{Figure Legends}
