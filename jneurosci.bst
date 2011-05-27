@@ -6,7 +6,7 @@
 %%
 %% merlin.mbs  (with options: `ay,nat,nm-rvv,keyxyr,dt-beg,yr-par,yrp-per,note-yr,jttl-rm,thtit-a,vol-it,vnum-x,volp-com,num-xser,jnm-x,btit-rm,bt-rm,add-pub,pub-par,pre-pub,edby,edbyy,pp,ed,abr,xedn,jabr,and-com,and-com-ed,nfss,')
 %% ----------------------------------------
-%% *** This is for Neuron ***
+%% *** This is for Journal of Neuroscience ***
 %% 
 %% Copyright 1994-2004 Patrick W Daly
  % ===============================================================
