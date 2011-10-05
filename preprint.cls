@@ -12,12 +12,22 @@
 % version 2005/12/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{preprint}[06/1/2011 v1.1]
+\ProvidesClass{preprint}[2011/10/05 v1.2]
 \typeout{A class for writing preprints}
 \typeout{Original by Peter Czoschke, adapted by Dan Meliza}
 \typeout{ }
 
-\LoadClassWithOptions{article}
+
+\DeclareOption{lineno}{%
+  \AtEndOfClass{\RequirePackage{lineno}}
+  \AtBeginDocument{\linenumbers}
+}
+\DeclareOption*{%
+  \PassOptionsToClass{\CurrentOption}{article}%
+}
+\ProcessOptions\relax
+
+\LoadClass{article}
 \RequirePackage{times}
 \RequirePackage{mathptmx}
 \RequirePackage{fullpage}
