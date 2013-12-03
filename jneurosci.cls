@@ -12,12 +12,12 @@
 \ProvidesClass{jneurosci}[06/1/2011 v1.1]
 \LoadClassWithOptions{preprint}
 
-\RequirePackage{natbib}
+%\RequirePackage{natbib}
 \RequirePackage[labelfont=bf,labelsep=period]{caption}
 
 %% Set the citation and bibliography style
 \bibliographystyle{jneurosci}
-\bibpunct[; ]{(}{)}{;}{a}{,}{;}
+%\bibpunct[; ]{(}{)}{;}{a}{,}{;}
 
 \renewcommand\methodstitle{Materials and Methods}
 
