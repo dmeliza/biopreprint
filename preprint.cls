@@ -22,6 +22,13 @@
   \AtEndOfClass{\RequirePackage{lineno}}
   \AtBeginDocument{\linenumbers}
 }
+
+%% Global option whether or not figures are shown
+\newif\if@showfigures\@showfiguresfalse
+\DeclareOption{showfigures}{
+  \@showfigurestrue
+}
+
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{article}%
 }
@@ -154,13 +161,19 @@
 
 %% Figures are generally not embedded in the file; to print the
 %% legends use \includegraphics and \captionof; the graphics
-%% themselves will be ignored
+%% themselves will be ignored (except if option showfigures is set)
+\if@showfigures
+\else
 \AtBeginDocument{\let\includegraphics\NAT@ignore}
 \newcommand{\NAT@ignore}[2][]{}
+\fi
 
 %redefine caption to captionlistentry to suppress figure floats
 \renewenvironment{figure}{%
+  \if@showfigures
+  \else
   \let\caption\captionlistentry%
+  \fi
   \@float{figure}
  }{\end@float}
 
