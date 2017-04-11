@@ -29,6 +29,12 @@
   \@showfigurestrue
 }
 
+%% Global option whether or not single spaced
+\newif\if@singlespace\@singlespacefalse
+\DeclareOption{singlespace}{
+  \@singlespacetrue
+}
+
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{article}%
 }
@@ -57,7 +63,11 @@
 \setlength\parindent{0in}
 \setlength\parskip{12pt}
 \newcommand{\spacing}[1]{\renewcommand{\baselinestretch}{#1}\large\normalsize}
+\if@singlespace
+\spacing{1}
+\else
 \spacing{2}
+\fi
 
 %% Reduce the amount of skip around equations
 \setlength{\abovedisplayskip}{0ex}
@@ -157,7 +167,11 @@
 }
 
 %% No heading for References section, but eat up the extra space from \section command
+\if@singlespace
+\renewcommand\refname{\vspace{-24pt}\setlength{\parskip}{12pt}}
+\else
 \renewcommand\refname{\vspace{-48pt}\setlength{\parskip}{12pt}}
+\fi
 
 %% Figures are generally not embedded in the file; to print the
 %% legends use \includegraphics and \captionof; the graphics
