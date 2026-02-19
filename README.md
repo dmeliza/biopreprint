@@ -1,5 +1,7 @@
 # biopreprint
 
+This project has been migrated to codeberg: https://codeberg.org/dmeliza/biopreprint
+
 Once upon a time, scientific journals required you to submit manuscripts for review in specific formats,
 and many hours were spent by graduate students and postdocs as they sadly reformatted after every rejection.
 
